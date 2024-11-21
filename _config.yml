@@ -1,0 +1,22 @@
+# Dependencies
+markdown:         redcarpet
+highlighter:      pygments
+
+# Permalinks
+permalink:        pretty
+relative_permalinks: true
+
+# Setup
+title:            Recipes-n-Ratings
+tagline:          'DSC 80 Final Project'
+description:      'A data science project exploring relationships between recipes posted on food.com and their community interactions'
+url:              https://anshu-b.github.io
+baseurl:          /recipes-n-ratings
+
+version:          2.1.0
+
+github:
+  repo:           https://github.com/Anshu-b/recipes-n-ratings
+
+plugins:
+  - jekyll-remote-theme
