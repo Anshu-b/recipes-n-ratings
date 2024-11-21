@@ -1,6 +1,9 @@
 # Dependencies
-markdown:         redcarpet
-highlighter:      pygments
+markdown: kramdown
+kramdown: 
+  input: GFM
+  toc_levels: 1..2
+highlighter:      rouge
 
 # Permalinks
 permalink:        pretty
@@ -13,10 +16,13 @@ description:      'A data science project exploring relationships between recipe
 url:              https://anshu-b.github.io
 baseurl:          /recipes-n-ratings
 
-version:          2.1.0
+#version:          2.1.0
 
 github:
   repo:           https://github.com/Anshu-b/recipes-n-ratings
 
 plugins:
+  - jekyll-paginate
+  - jekyll-archives
+  - jekyll-commonmark-ghpages
   - jekyll-remote-theme
