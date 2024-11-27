@@ -1,28 +1,7 @@
-# Dependencies
-markdown: kramdown
-kramdown: 
-  input: GFM
-  toc_levels: 1..2
-highlighter:      rouge
+remote_theme: pages-themes/tactile@v0.2.0
 
-# Permalinks
-#permalink:        pretty
-#relative_permalinks: true
-
-# Setup
-title:            Recipes-n-Ratings
-tagline:          'DSC 80 Final Project'
-description:      'A data science project exploring relationships between recipes posted on food.com and their community interactions'
-url:              https://anshu-b.github.io
-baseurl:          /recipes-n-ratings
-
-#version:          2.1.0
-
-github:
-  repo:           https://github.com/Anshu-b/recipes-n-ratings
+title: Recipes-n-Ratings
+description: A final project for DSC 80
 
 plugins:
-  - jekyll-paginate
-  - jekyll-archives
-  - jekyll-commonmark-ghpages
-  - jekyll-remote-theme
+- jekyll-remote-theme 
