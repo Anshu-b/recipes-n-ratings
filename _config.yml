@@ -1,7 +1,7 @@
 remote_theme: pages-themes/tactile@v0.2.0
 
 title: Recipes-n-Ratings
-description: A final project for DSC 80
+description: By Ansh Bhatnagar & Jeronimo Adames-Baena
 
 plugins:
 - jekyll-remote-theme 
