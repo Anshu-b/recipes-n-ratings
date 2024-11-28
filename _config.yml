@@ -5,6 +5,7 @@ description: By Ansh Bhatnagar & Jeronimo Adames-Baena
 
 plugins:
 - jekyll-remote-theme 
+- jekyll-sass-converter
 
-custom_css: style.scss
+custom_css: /assets/css/style.scss
 
