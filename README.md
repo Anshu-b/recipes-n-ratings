@@ -5,30 +5,32 @@ Food, a necessity in our day-to-day lives, has long throughout history been a co
 
 #### Recipe
 The first dataset is `recipes`, which contains 12 columns (of information) and 83,782 rows (recipes). Here is a breakdown of what each column represents:
-| Column       | Description|
-|--------------|--------------|
-| `'name'`          |  name of the recipe [string]|
-| `'id'`            |  recipe id [int]         | 
-| `'minutes'`       | time needed to prepare recipe (in minutes) [int]| 
-| `'contributor_id'`| user ID of recipe poster [int]| 
-| `'submitted'`     | date of recipe submission (YYYY-MM-DD) [string]| 
-| `'tags'`          | food.com tags for the recipe [string]| 
-| `'nutrition'`     | nutrition information about the recipe (number of calories, total fat PDV, sugar PDV, sodium PDV, protein PDV, saturated fat PDV, carbohydrates PDV) [string]         | 
-| `'n_steps'`       |  number of steps in the recipe [int]         | 
-| `'steps'`         |  detailed steps for the recipe [string]         | 
-| `'description'`   | user-written recipe description [string]        | 
-| `'ingredients'`   |  detailed ingredients for the recipe [string]  | 
-| `'n_ingredients'` |  number of ingredients for the recipe [int]     | 
 
+| Column             | Description                                                                 |
+|--------------------|-----------------------------------------------------------------------------|
+| `'name'`           | Name of the recipe [string]                                                |
+| `'id'`             | Recipe ID [int]                                                           |
+| `'minutes'`        | Time needed to prepare the recipe (in minutes) [int]                      |
+| `'contributor_id'` | User ID of the recipe poster [int]                                         |
+| `'submitted'`      | Date of recipe submission (YYYY-MM-DD) [string]                           |
+| `'tags'`           | Food.com tags for the recipe [string]                                     |
+| `'nutrition'`      | Nutrition information about the recipe (calories, fat, sugar, sodium, etc.) [string] |
+| `'n_steps'`        | Number of steps in the recipe [int]                                       |
+| `'steps'`          | Detailed steps for the recipe [string]                                    |
+| `'description'`    | User-written recipe description [string]                                  |
+| `'ingredients'`    | Detailed ingredients for the recipe [string]                              |
+| `'n_ingredients'`  | Number of ingredients for the recipe [int]                                |
 
-The second dataset is `interactions`, which contains 5 columns (of information) and 731,927 rows (review). Here is a breakdown of what each column represents:
-| Column       | Description|
-|--------------|--------------|
-| `'user_id'`  | user id of the person interacting [int]|
-| `'recipe_id'`| id of recipe being reviewed [int]         | 
-| `'date'`     | date of the interaction [string] |
-| `'rating'`   | rating of the recipe (1 - 5, whole numbers only) [int] | 
-| `'review'`   | detailed review of the recipe [string] | 
+The second dataset is `interactions`, which contains 5 columns (of information) and 731,927 rows (reviews). Here is a breakdown of what each column represents:
+
+| Column       | Description                                                   |
+|--------------|---------------------------------------------------------------|
+| `'user_id'`  | User ID of the person interacting [int]                       |
+| `'recipe_id'`| ID of the recipe being reviewed [int]                         |
+| `'date'`     | Date of the interaction [string]                              |
+| `'rating'`   | Rating of the recipe (1 - 5, whole numbers only) [int]        |
+| `'review'`   | Detailed review of the recipe [string]                        |
+
 
 
 
