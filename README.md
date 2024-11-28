@@ -21,9 +21,9 @@ The first dataset is `recipes`, which contains 12 columns (of information) and 8
 | `'ingredients'`    | Detailed ingredients for the recipe [string]                              |
 | `'n_ingredients'`  | Number of ingredients for the recipe [int]                                |
 
-
 #### Interactions
 The second dataset is `interactions`, which contains 5 columns (of information) and 731,927 rows (reviews). Here is a breakdown of what each column represents:
+
 | Column       | Description                                                   |
 |--------------|---------------------------------------------------------------|
 | `'user_id'`  | User ID of the person interacting [int]                       |
