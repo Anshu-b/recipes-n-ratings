@@ -1,9 +1,9 @@
-@import "{{ site.theme }}";
-
 table, th, td {
     border: 1px solid black !important;
 }
 
-p {
+body {
     color: green !important;
 }
+
+@import "{{ site.theme }}";

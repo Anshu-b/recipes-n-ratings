@@ -21,6 +21,8 @@ The first dataset is `recipes`, which contains 12 columns (of information) and 8
 | `'ingredients'`    | Detailed ingredients for the recipe [string]                              |
 | `'n_ingredients'`  | Number of ingredients for the recipe [int]                                |
 
+<p></p>
+
 #### Interactions
 The second dataset is `interactions`, which contains 5 columns (of information) and 731,927 rows (reviews). Here is a breakdown of what each column represents:
 
@@ -31,6 +33,8 @@ The second dataset is `interactions`, which contains 5 columns (of information) 
 | `'date'`     | Date of the interaction [string]                              |
 | `'rating'`   | Rating of the recipe (1 - 5, whole numbers only) [int]        |
 | `'review'`   | Detailed review of the recipe [string]                        |
+
+<p></p>
 
 #### Identifying a Research Question
 Kick-backed and relaxed while feasting on a combo plate from Punjabi Tandoor, Jeronimo & Ansh pondered what questions they could ask based on the available data. Hands lathered in delicious, creamy curry and buttery garlic naan, they asked: "Do high calorie foods also tend to have higher ratings?" 
