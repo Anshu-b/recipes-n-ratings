@@ -14,13 +14,15 @@ The first dataset is `recipes`, which contains 12 columns (of information) and 8
 | `'contributor_id'` | User ID of the recipe poster [int]                                         |
 | `'submitted'`      | Date of recipe submission (YYYY-MM-DD) [string]                           |
 | `'tags'`           | Food.com tags for the recipe [string]                                     |
-| `'nutrition'`      | Nutrition information about the recipe (calories, fat, sugar, sodium, etc.) [string] |
+| `'nutrition'`      | Nutrition information about the recipe (number of calories, total fat PDV, sugar PDV, sodium PDV, protein PDV, saturated fat PDV, carbohydrates PDV) [string] |
 | `'n_steps'`        | Number of steps in the recipe [int]                                       |
 | `'steps'`          | Detailed steps for the recipe [string]                                    |
 | `'description'`    | User-written recipe description [string]                                  |
 | `'ingredients'`    | Detailed ingredients for the recipe [string]                              |
 | `'n_ingredients'`  | Number of ingredients for the recipe [int]                                |
 
+
+#### Interactions
 The second dataset is `interactions`, which contains 5 columns (of information) and 731,927 rows (reviews). Here is a breakdown of what each column represents:
 
 | Column       | Description                                                   |

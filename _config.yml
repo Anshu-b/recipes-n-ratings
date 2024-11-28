@@ -5,3 +5,6 @@ description: By Ansh Bhatnagar & Jeronimo Adames-Baena
 
 plugins:
 - jekyll-remote-theme 
+
+include:
+  - style.css
