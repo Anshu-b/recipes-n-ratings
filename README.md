@@ -8,17 +8,17 @@ The first dataset is `recipes`, which contains 12 columns (of information) and 8
 
 | Column             | Description                                                                 |
 |--------------------|-----------------------------------------------------------------------------|
-| `'name'`           | Name of the recipe [string]                                                |
+| `'name'`           | Name of the recipe [object]                                                |
 | `'id'`             | Recipe ID [int]                                                           |
 | `'minutes'`        | Time needed to prepare the recipe (in minutes) [int]                      |
 | `'contributor_id'` | User ID of the recipe poster [int]                                         |
-| `'submitted'`      | Date of recipe submission (YYYY-MM-DD) [string]                           |
-| `'tags'`           | Food.com tags for the recipe [string]                                     |
-| `'nutrition'`      | Nutrition information about the recipe (number of calories, total fat PDV, sugar PDV, sodium PDV, protein PDV, saturated fat PDV, carbohydrates PDV) [string] |
+| `'submitted'`      | Date of recipe submission (YYYY-MM-DD) [object]                           |
+| `'tags'`           | Food.com tags for the recipe [object]                                     |
+| `'nutrition'`      | Nutrition information about the recipe (number of calories, total fat PDV, sugar PDV, sodium PDV, protein PDV, saturated fat PDV, carbohydrates PDV) [object] |
 | `'n_steps'`        | Number of steps in the recipe [int]                                       |
-| `'steps'`          | Detailed steps for the recipe [string]                                    |
-| `'description'`    | User-written recipe description [string]                                  |
-| `'ingredients'`    | Detailed ingredients for the recipe [string]                              |
+| `'steps'`          | Detailed steps for the recipe [object]                                    |
+| `'description'`    | User-written recipe description [object]                                  |
+| `'ingredients'`    | Detailed ingredients for the recipe [object]                              |
 | `'n_ingredients'`  | Number of ingredients for the recipe [int]                                |
 
 <p></p>
@@ -30,9 +30,9 @@ The second dataset is `interactions`, which contains 5 columns (of information) 
 |--------------|---------------------------------------------------------------|
 | `'user_id'`  | User ID of the person interacting [int]                       |
 | `'recipe_id'`| ID of the recipe being reviewed [int]                         |
-| `'date'`     | Date of the interaction [string]                              |
+| `'date'`     | Date of the interaction [object]                              |
 | `'rating'`   | Rating of the recipe (1 - 5, whole numbers only) [int]        |
-| `'review'`   | Detailed review of the recipe [string]                        |
+| `'review'`   | Detailed review of the recipe [object]                        |
 
 <p></p>
 
@@ -50,6 +50,17 @@ Finding the results to this question can have significant impacts for companies 
 
 
 ## Data Cleaning & Exploratory Data Analysis
+This section will cover the steps we took to make our data more manageable, and also the observations we made during the EDA process.
+
+#### Merging the DataFrames
+For ease in working with the data, we decided to left-merge the interactions dataframe onto the recipes dataframe. We specifically used left-merge to ensure all recipes in the dataset are preserved, regardless of the number of reviews it recieved. Merging the dataframe also allows us to map recipes to their reviews. Correspondingly, we also drop the duplicate column of 'id' and set 'recipe_id' to the index of our new DataFrame.
+
+#### Adding Average Ratings Column
+Since some recipes may have multiple ratings, it is helpful to add an average_rating [int] column to compare individual ratings with the mean rating for that recipe.
+
+
+
+####
 
 ## Hypothesis Testing
 
