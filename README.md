@@ -144,8 +144,6 @@ An aspect we had not yet considered, recipes themselves can be analyzed and unde
 
 #### Interesting Aggregates
 
-# **OPTIONAL PLOT FOR ANY OF BELOW AGGREGATES**
-
 **Ranking Top Contributors by Number of Recipes Posted**
 This step identifies the most active contributors on the platform by counting the number of recipes they have submitted and calculating the average rating and average number of ingredients per recipe per contributor. This provides insights into the activity levels of top users and their potential influence on the food.com recipe platform. Understanding top contributors can help identify trends in recipe popularity and quality linked to these users.
 
@@ -264,7 +262,7 @@ To perform the test, we first separated the recipes into two groups based on the
 The **observed difference in means was found to be 0.158**, and the **p-value was 0.00**, which is less than the significance level. Therefore, we reject the null hypothesis, concluding that **there is a statistically significant relationship between higher calorie content and higher mean ratings for recipes**. This result suggests that, at least for this dataset from food.com, calorie-dense recipes are more likely to receive higher ratings, supporting the idea that certain ingredients contributing to higher calorie counts may influence overall recipe satisfaction.
 
 
-## Framing a Prediction
+## Framing a Prediction Problem
 We plan to predict the average rating of a recipe using a regression approach. Regression is appropriate here because the average rating is a continuous variable that is not distinctly catgeorical. To make predicitons, we will build a **linear regression model** that uses the **TF-IDF scores of the recipe's tags** and the **number of calories**. to predict the average rating. 
 
 We chose the average rating as the response variable since it represents the consensus of user satisfaction with a recipe from those who reviewed it. Incorporating TF-IDF and calorie information is useful since our earlier analysis with hypothesis testing and EDA showed potential relationships between rating trends and these variables. 
@@ -311,7 +309,7 @@ After this hyperparameter tuning, we recalculated our metric and saw an improvem
 Overall, we realized that classification is a valid approach for predicting recipe ratings (better than regression in our case), especially when ratings are treated as categorical labels. The Random Forest Classifier with hyperparameter tuning from `GridSearchCV` shows very good performance with only a few features, particularly for higher-rated recipes. However, we still couldn't very accurately predict the lower-rated categories due to data imbalance.
 
 
-## Fairness Model
+## Fairness Analysis
 To further put our final model to the test, we analyzed the fairness of our model by comparing its performance on short versus long reviews. Since we are using linear regression, we chose the **difference in R^2** as our test statistic. This  helps us assess whether the model performs differently for short and long reviews. Our analysis uses a permutation test to determine if any observed differences in performance are likely due to random chance. We divided our data into 2 groups: reviews with a length less than or equal to the median review length & reviews with a length greater than the median review length. This is done to test if our model may perform differently on shorter or longer reviews.
 
 **Null Hypothesis (H0)**: Our model is fair. The R^2 difference between short and long reviews is due to random chance, meaning there is no significant performance discrepancy.
@@ -327,4 +325,4 @@ To further put our final model to the test, we analyzed the fairness of our mode
 <p></p>
 
 After running a permutation test 1000 times, our **observed R^2 Difference was -0.0081** and our **p-value is 0.189.** The observed R^2 difference of -0.0081 indicates that the model performed slightly worse on the short reviews compared to the long reviews. However, this difference is very small and, given the p-value of 0.189, it is not statistically significant.
-Since the p-value is greater than our 0.05, we **fail to reject** the null hypothesis. Therefore, based on the permutation test, there is no significant difference in model performance between short and long reviews. Therefore, we can safely conclude that our model **appears to be fair**, at least for review lengths, since its R^2 performance does not differ significantly between short and long reviews.
+Since the p-value is greater than our 0.05, we **fail to reject** the null hypothesis. Therefore, based on the permutation test, there is no significant difference in model performance between short and long reviews. We can safely conclude that our model **appears to be fair**, at least based on review lengths, since its R^2 performance does not differ significantly between short and long reviews.
