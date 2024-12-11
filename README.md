@@ -118,7 +118,7 @@ The 'nutrition' column, originally stored as a string, is transformed into a lis
 
 # **OPTIONAL PLOT FOR ANY OF BELOW AGGREGATES**
 
-1. **Ranking Top Contributors by Number of Recipes Posted**
+**Ranking Top Contributors by Number of Recipes Posted**
 This step identifies the most active contributors on the platform by counting the number of recipes they have submitted and calculating the average rating and average number of ingredients per recipe per contributor. This provides insights into the activity levels of top users and their potential influence on the food.com recipe platform. Understanding top contributors can help identify trends in recipe popularity and quality linked to these users.
 
 | Contributor ID | Recipe Count | Avg Rating | Avg Ingredients |
@@ -134,7 +134,7 @@ This step identifies the most active contributors on the platform by counting th
 
 <p></p>
 
-2. **Recipe Rating Compared to Recipe Complexity Factors**
+**Recipe Rating Compared to Recipe Complexity Factors**
 The relationship between recipe ratings and complexity factors like preparation time (minutes), the number of steps, and the number of ingredients is grouped. For each rating, the mean and median values of these factors are computed. This shows whether high-rated recipes are simpler or more complex. It also aids in understanding the trade-offs between convenience and quality from a user perspective.
 
 | Rating | Avg Minutes | Median Minutes | Avg Steps | Median Steps | Avg Ingredients | Median Ingredients |
@@ -148,7 +148,7 @@ The relationship between recipe ratings and complexity factors like preparation 
 <p></p>
 
 
-3. **Recipe Rating Versus Nutrition Facts**
+**Recipe Rating Versus Nutrition Facts**
 This aggregate plots the relationship between recipe ratings and their nutritional content. By grouping the dataset by rating and calculating both the mean and median of various nutrition-related columns (such as calories, fat, sugar, sodium, protein, saturated fat, and carbohydrates), we can learn how the nutritional content varies across different rating levels. This allows us to identify whether higher-rated recipes tend to be healthier or have specific nutritional characteristics (e.g., lower sugar or fat content) compared to lower-rated ones, which is our main research question. 
 
 | Rating | Num Calories (Mean) | Num Calories (Median) | Total Fat PDV (Mean) | Total Fat PDV (Median) | Sugar PDV (Mean) | Sugar PDV (Median) | Sodium PDV (Mean) | Sodium PDV (Median) | Protein PDV (Mean) | Protein PDV (Median) | Saturated Fat PDV (Mean) | Saturated Fat PDV (Median) | Carbohydrates PDV (Mean) | Carbohydrates PDV (Median) |
@@ -162,7 +162,7 @@ This aggregate plots the relationship between recipe ratings and their nutrition
 <p></p>
 
 
-4. **Pivot Table of Tags vs. Ratings**
+**Pivot Table of Tags vs. Ratings**
 We created a pivot table to explore the relationship between recipe hashtags and ratings. By exploding the tags column and aggregating the count of recipes per tag and rating, this table shows how certain recipe categories are rated. 
 
 | Tags                  | Rating 1.0 | Rating 2.0 | Rating 3.0 | Rating 4.0 | Rating 5.0 |
@@ -186,36 +186,33 @@ We believe that the missingness of the 'review' column is Not Missing at Random 
 #### Assessment of Missingness
 First, we assessed the missingness of data within the dataset to understand how it might affect our analysis. Several columns have significant missing values including `'rating'`, `'review'`, and `'description'`, but the `'rating'` column had 6.41% missing data, making it the most important column to examine. We believe the missingness of the 'rating' is Missing at Random (MAR), meaning that the absence of ratings does not depend on the rating values themselves but rather might be influenced by other variables. 
 
-To test this hypothesis, we perform a permutation test to evaluate if the missingness of ratings is dependent on other columns, namely `'num_calories'`, `'n_ingredients'`, `'n_steps'`, `'minutes'`, and `'n_tags'`. We use difference in means since most it directly measures how the average values of a given continuous numerical column differ between the groups of missing and non-missing ratings. 
+To test this hypothesis, we perform a permutation test to evaluate if the missingness of ratings is dependent on other columns, namely `'num_calories'`, and `'minutes'`. We use difference in means since most it directly measures how the average values of a given continuous numerical column differ between the groups of missing and non-missing ratings. 
 
-**Null hypothesis (H0):** The missingness of `'ratings'` does not depend on these columns
-**Alternative hypothesis (H1):** The missingness of `'ratings'` does depend on the other columns. 
-**Test Statistic:** Difference in Means
-**Significance Level (α):** 0.05
+**Null hypothesis (H0):** The missingness of `'ratings'` does not depend on `'num_calories'`, and `'minutes'`. <p></p>
+**Alternative hypothesis (H1):** The missingness of `'ratings'` does depend on `'num_calories'`, and `'minutes'`.  <p></p>
+**Test Statistic:** Difference in Means <p></p>
+**Significance Level (α):** 0.05 <p></p>
 If the p-value is less than α, we reject H0, indicating that the missingness of the 'rating' column is dependent on the specific column. Otherwise, we fail to reject H0.
 
 | Column         | p-value   | Dependent on Missingness (p < 0.05)? |
 |----------------|-----------|--------------------------------------|
 | num_calories   | 0.0       | True                                 |
-| n_ingredients  | 0.0       | True                                 |
-| n_steps        | 0.0       | True                                 |
 | minutes        | 0.134     | False                                |
-| n_tags         | 0.0       | True                                 |
 
 <p></p>
 
 # **PLOT**
 # **PLOT**
 
-Based on the results of the permutation test, we identify that the missingness of 'rating' is likely influenced by num_calories, n_ingredients, n_steps, and n_tags, but not by minutes. 
+Based on the results of the permutation test, we identify that the missingness of `'rating'` is likely influenced by `'num_calories'` but not by `'minutes'`. 
 
 ## Hypothesis Testing
 We decided to test whether there is a significant relationship between the number of calories in a recipe and its mean rating. We chose to use a permutation test because we do not have enough information to assume that the ratings or calories follow a normal distribution. 
 
-**Null Hypothesis (H0):** There is no relationship between the number of calories and the mean rating of a recipe 
-**Alternative Hypothesis (H1):** Higher-calorie recipes tend to have higher mean ratings than lower-calorie recipes.
-**Test Statistic:** Difference in Means
-**Significance Level (α):** 0.05
+**Null Hypothesis (H0):** There is no relationship between the number of calories and the mean rating of a recipe <p></p>
+**Alternative Hypothesis (H1):** Higher-calorie recipes tend to have higher mean ratings than lower-calorie recipes. <p></p>
+**Test Statistic:** Difference in Means <p></p>
+**Significance Level (α):** 0.05 <p></p>
 
 Since the hypothesis is directional with numerical data, a difference in means test-statistic is the most appropriate. We reasoned that foods with higher calorie content, often rich in fats, sugars, and carbohydrates, are likely to be rated more favorably. For example, popular calorically-dense foods like pizza, cookies, and ice cream are often people's favorites, thus supporting the hypothesis that they would have higher ratings.
 
@@ -225,6 +222,15 @@ The **observed difference in means was found to be 0.158**, and the **p-value wa
 
 
 ## Framing a Prediction
+We plan to predict the average rating of a recipe using a regression approach. Regression is appropriate here because the average rating is a continuous variable that is not distinctly catgeorical. To make predicitons, we will build a **linear regression model** that uses the **TF-IDF scores of the recipe's tags** and the **number of calories**. to predict the average rating. 
+
+We chose the average rating as the response variable since it represents the consensus of user satisfaction with a recipe from those who reviewed it. Incorporating TF-IDF and calorie information is useful since our earlier analysis with hypothesis testing and EDA showed potential relationships between rating trends and these variables. 
+
+To evaluate the model’s performance, we will use the **mean squared error (MSE)** as the metric. MSE is suitable because it penalizes larger prediction errors more heavily, ensuring that our model minimizes substantial deviations from actual ratings. We actually also used the **R-squared value** to measure how well the features collectively explain the variance in average ratings.
+
+The features available for improving our prediction model include all columns in the dataset and potentially engineered features from these existing columns through transformers such as TF-IDF and StandardizedScaler. These features are intrinsic to the recipes themselves and can be accessed regardless of whether the recipe has received user ratings or reviews.
+
+To challenge ourselves further, we additionally decided to run a classification task with out data using the RandomForestClassifier.
 
 ## Baseline Model
 
