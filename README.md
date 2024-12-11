@@ -237,8 +237,19 @@ If the p-value is less than α, we reject H0, indicating that the missingness of
 
 <p></p>
 
-# **PLOT**
-# **PLOT**
+<iframe
+  src="assets/plots/missingnessplot1.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+<iframe
+  src="assets/plots/missingnessplot2.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 Based on the results of the permutation test, we identify that the missingness of `'rating'` is likely influenced by `'num_calories'` but not by `'minutes'`. 
 
