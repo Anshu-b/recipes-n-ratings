@@ -90,6 +90,7 @@ The 'nutrition' column, originally stored as a string, is transformed into a lis
 | `'saturated_fat_PDV'`| Saturated fat as a percentage of daily value (PDV) [float]                                  |
 | `'carbohydrates_PDV'`| Carbohydrates content as a percentage of daily value (PDV) [float]                          |
 
+<p></p>
 
 #### Numerical Column Statistics
 
@@ -104,13 +105,20 @@ The 'nutrition' column, originally stored as a string, is transformed into a lis
 | 75%             | 60.00        | 13.00     | 11.00         | 21.00    | 5.00      | 5.00           | 491.10       | 39.00         | 58.00     | 33.00      | 50.00       | 49.00             | 15.00             |
 | Max             | 1,050,000.00 | 100.00    | 37.00         | 49.00    | 5.00      | 5.00           | 45,609.00    | 3464.00       | 30,260.00 | 29,338.00  | 4,356.00    | 6875.00           | 3007.00           |
 
+<p></p>
+
 
 #### Univariate Analysis
+# **PLOT**
 
 #### Bivariate Analysis
+# **PLOT**
 
 #### Interesting Aggregates
-1. Ranking Top Contributors by Number of Recipes Posted
+
+# **OPTIONAL PLOT FOR ANY OF BELOW AGGREGATES**
+
+1. **Ranking Top Contributors by Number of Recipes Posted**
 This step identifies the most active contributors on the platform by counting the number of recipes they have submitted and calculating the average rating and average number of ingredients per recipe per contributor. This provides insights into the activity levels of top users and their potential influence on the food.com recipe platform. Understanding top contributors can help identify trends in recipe popularity and quality linked to these users.
 
 | Contributor ID | Recipe Count | Avg Rating | Avg Ingredients |
@@ -124,8 +132,9 @@ This step identifies the most active contributors on the platform by counting th
 | 2002289981     | 1            | 1.00       | 21.00           |
 | **Total Rows** | **15,443**   |            |                 |
 
+<p></p>
 
-2. Recipe Rating Compared to Recipe Complexity Factors
+2. **Recipe Rating Compared to Recipe Complexity Factors**
 The relationship between recipe ratings and complexity factors like preparation time (minutes), the number of steps, and the number of ingredients is grouped. For each rating, the mean and median values of these factors are computed. This shows whether high-rated recipes are simpler or more complex. It also aids in understanding the trade-offs between convenience and quality from a user perspective.
 
 | Rating | Avg Minutes | Median Minutes | Avg Steps | Median Steps | Avg Ingredients | Median Ingredients |
@@ -136,8 +145,10 @@ The relationship between recipe ratings and complexity factors like preparation 
 | 4.0    | 91.59       | 35.0           | 9.58      | 9.0          | 9.10            | 9.0                 |
 | 5.0    | 106.92      | 35.0           | 9.98      | 9.0          | 9.05            | 9.0                 |
 
+<p></p>
 
-3. Recipe Rating Versus Nutrition Facts
+
+3. **Recipe Rating Versus Nutrition Facts**
 This aggregate plots the relationship between recipe ratings and their nutritional content. By grouping the dataset by rating and calculating both the mean and median of various nutrition-related columns (such as calories, fat, sugar, sodium, protein, saturated fat, and carbohydrates), we can learn how the nutritional content varies across different rating levels. This allows us to identify whether higher-rated recipes tend to be healthier or have specific nutritional characteristics (e.g., lower sugar or fat content) compared to lower-rated ones, which is our main research question. 
 
 | Rating | Num Calories (Mean) | Num Calories (Median) | Total Fat PDV (Mean) | Total Fat PDV (Median) | Sugar PDV (Mean) | Sugar PDV (Median) | Sodium PDV (Mean) | Sodium PDV (Median) | Protein PDV (Mean) | Protein PDV (Median) | Saturated Fat PDV (Mean) | Saturated Fat PDV (Median) | Carbohydrates PDV (Mean) | Carbohydrates PDV (Median) |
@@ -148,8 +159,10 @@ This aggregate plots the relationship between recipe ratings and their nutrition
 | 4.0    | 405.05              | 302.0                 | 29.94                 | 19.0                   | 36.43             | 20.0                | 12.83              | 9.0                  | 6.0                 | 7.0                    | 5.0                      | 6.0                       | 12.84                    | 9.0                       |
 | 5.0    | 415.21              | 298.2                 | 31.79                 | 20.0                   | 39.23             | 22.0                | 13.04              | 8.0                  | 2.0                 | 1.0                    | 8.0                      | 7.0                       | 13.57                    | 8.0                       |
 
+<p></p>
 
-4. Pivot Table of Tags vs. Ratings
+
+4. **Pivot Table of Tags vs. Ratings**
 We created a pivot table to explore the relationship between recipe hashtags and ratings. By exploding the tags column and aggregating the count of recipes per tag and rating, this table shows how certain recipe categories are rated. 
 
 | Tags                  | Rating 1.0 | Rating 2.0 | Rating 3.0 | Rating 4.0 | Rating 5.0 |
@@ -163,9 +176,52 @@ We created a pivot table to explore the relationship between recipe hashtags and
 | zucchini              | 3          | 2          | 10         | 56         | 367        |
 | **Total Rows**        | **544**    |            |            |            |            |
 
+<p></p>
+
+## Assessment of Missingness
+
+#### Not-Missing-At-Random (NMAR) Analysis
+We believe that the missingness of the 'review' column is Not Missing at Random (NMAR). This inference is based on the fact that submitting a review was not a required action when interacting with a recipe. Therefore, we assume that the absence of a review is influenced by user satisfaction with the recipe and whether they felt compelled to leave feedback. For example, users who give very low or high ratings may be more likely to leave a strong written review to expand more on why they passionately liked or disliked the recipe. Users who enjoyed a recipe but didn't have a strong opinion on it are less liekly to leave a reflective review.
+
+#### Assessment of Missingness
+First, we assessed the missingness of data within the dataset to understand how it might affect our analysis. Several columns have significant missing values including `'rating'`, `'review'`, and `'description'`, but the `'rating'` column had 6.41% missing data, making it the most important column to examine. We believe the missingness of the 'rating' is Missing at Random (MAR), meaning that the absence of ratings does not depend on the rating values themselves but rather might be influenced by other variables. 
+
+To test this hypothesis, we perform a permutation test to evaluate if the missingness of ratings is dependent on other columns, namely `'num_calories'`, `'n_ingredients'`, `'n_steps'`, `'minutes'`, and `'n_tags'`. We use difference in means since most it directly measures how the average values of a given continuous numerical column differ between the groups of missing and non-missing ratings. 
+
+**Null hypothesis (H0):** The missingness of `'ratings'` does not depend on these columns
+**Alternative hypothesis (H1):** The missingness of `'ratings'` does depend on the other columns. 
+**Test Statistic:** Difference in Means
+**Significance Level (α):** 0.05
+If the p-value is less than α, we reject H0, indicating that the missingness of the 'rating' column is dependent on the specific column. Otherwise, we fail to reject H0.
+
+| Column         | p-value   | Dependent on Missingness (p < 0.05)? |
+|----------------|-----------|--------------------------------------|
+| num_calories   | 0.0       | True                                 |
+| n_ingredients  | 0.0       | True                                 |
+| n_steps        | 0.0       | True                                 |
+| minutes        | 0.134     | False                                |
+| n_tags         | 0.0       | True                                 |
+
+<p></p>
+
+# **PLOT**
+# **PLOT**
+
+Based on the results of the permutation test, we identify that the missingness of 'rating' is likely influenced by num_calories, n_ingredients, n_steps, and n_tags, but not by minutes. 
 
 ## Hypothesis Testing
+We decided to test whether there is a significant relationship between the number of calories in a recipe and its mean rating. We chose to use a permutation test because we do not have enough information to assume that the ratings or calories follow a normal distribution. 
 
+**Null Hypothesis (H0):** There is no relationship between the number of calories and the mean rating of a recipe 
+**Alternative Hypothesis (H1):** Higher-calorie recipes tend to have higher mean ratings than lower-calorie recipes.
+**Test Statistic:** Difference in Means
+**Significance Level (α):** 0.05
+
+Since the hypothesis is directional with numerical data, a difference in means test-statistic is the most appropriate. We reasoned that foods with higher calorie content, often rich in fats, sugars, and carbohydrates, are likely to be rated more favorably. For example, popular calorically-dense foods like pizza, cookies, and ice cream are often people's favorites, thus supporting the hypothesis that they would have higher ratings.
+
+To perform the test, we first separated the recipes into two groups based on the median number of calories: high-calorie recipes (above the median) and low-calorie recipes (below the median). We then conducted the permutation test by calculating the difference in mean ratings between the two groups, using 1,000 permutations to generate a distribution of the test statistic under the null hypothesis. 
+
+The **observed difference in means was found to be 0.158**, and the **p-value was 0.00**, which is less than the significance level. Therefore, we reject the null hypothesis, concluding that **there is a statistically significant relationship between higher calorie content and higher mean ratings for recipes**. This result suggests that, at least for this dataset from food.com, calorie-dense recipes are more likely to receive higher ratings, supporting the idea that certain ingredients contributing to higher calorie counts may influence overall recipe satisfaction.
 
 
 ## Framing a Prediction
