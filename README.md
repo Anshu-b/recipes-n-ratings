@@ -259,7 +259,7 @@ We created the model pipeline with a ColumnTransformer to preprocess numerical f
 
 Since we used linear regression, no hyperparameter tuning was needed since focused on feature engineering and multi-dimensional linear regression. However, we decided to also use Classification as a bonus exploration of our data, which did involve hyperparamter tuning.
 
-#### Looking at Classification: Random Forest Classifier
+#### Looking at Classification: Random Forest Classifier (BONUS)
 Due to our linear regression model's rather poor overall performance, our group explored using multi-class classification to predict the average rating of a recipe. Since average ratings are ordinal, we explicitly converted them to categorical labels by grouping them into discrete bins of 0.5 by rounding the continuous `average_rating` values to the nearest half point (ex: 4.5). This created a new feature, `avg_rating_group`, that became the target variable. 
 
 For the feature set, we used `num_calories`, a numerical feature, and `tags_split`, a text feature represented by TF-IDF. These features were processed with a ColumnTransformer to handle the two types of input data appropriately.
@@ -277,4 +277,4 @@ Overall, we realized that classification is a valid approach for predicting reci
 
 
 ## Fairness Model
-
+# Jeronimo
