@@ -218,12 +218,16 @@ To test this hypothesis, we perform a permutation test to evaluate if the missin
 
 **Null hypothesis (H0):** The missingness of `'ratings'` does not depend on `'num_calories'`, and `'minutes'`. 
 <p></p>
+
 **Alternative hypothesis (H1):** The missingness of `'ratings'` does depend on `'num_calories'`, and `'minutes'`.  
 <p></p>
+
 **Test Statistic:** Difference in Means 
 <p></p>
+
 **Significance Level (α):** 0.05 
 <p></p>
+
 If the p-value is less than α, we reject H0, indicating that the missingness of the 'rating' column is dependent on the specific column. Otherwise, we fail to reject H0.
 
 | Column         | p-value   | Dependent on Missingness (p < 0.05)? |
@@ -243,10 +247,13 @@ We decided to test whether there is a significant relationship between the numbe
 
 **Null Hypothesis (H0):** There is no relationship between the number of calories and the mean rating of a recipe 
 <p></p>
+
 **Alternative Hypothesis (H1):** Higher-calorie recipes tend to have higher mean ratings than lower-calorie recipes. 
 <p></p>
+
 **Test Statistic:** Difference in Means 
 <p></p>
+
 **Significance Level (α):** 0.05 
 <p></p>
 
@@ -305,4 +312,19 @@ Overall, we realized that classification is a valid approach for predicting reci
 
 
 ## Fairness Model
-# Jeronimo
+To further put our final model to the test, we analyzed the fairness of our model by comparing its performance on short versus long reviews. Since we are using linear regression, we chose the **difference in R^2** as our test statistic. This  helps us assess whether the model performs differently for short and long reviews. Our analysis uses a permutation test to determine if any observed differences in performance are likely due to random chance. We divided our data into 2 groups: reviews with a length less than or equal to the median review length & reviews with a length greater than the median review length. This is done to test if our model may perform differently on shorter or longer reviews.
+
+**Null Hypothesis (H0)**: Our model is fair. The R^2 difference between short and long reviews is due to random chance, meaning there is no significant performance discrepancy.
+<p></p>
+
+**Alternative Hypothesis (H₁)**: Our model is unfair. The R² for short reviews is significantly lower than for long reviews, suggesting that the model's performance varies based on review length.
+<p></p>
+
+**Test Statistic:** Difference in R^2
+<p></p>
+
+**Significance Level (α):** 0.05
+<p></p>
+
+After running a permutation test 1000 times, our **observed R^2 Difference was -0.0081** and our **p-value is 0.189.** The observed R^2 difference of -0.0081 indicates that the model performed slightly worse on the short reviews compared to the long reviews. However, this difference is very small and, given the p-value of 0.189, it is not statistically significant.
+Since the p-value is greater than our 0.05, we **fail to reject** the null hypothesis. Therefore, based on the permutation test, there is no significant difference in model performance between short and long reviews. Therefore, we can safely conclude that our model **appears to be fair**, at least for review lengths, since its R^2 performance does not differ significantly between short and long reviews.
