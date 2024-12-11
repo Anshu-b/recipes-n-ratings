@@ -188,10 +188,14 @@ First, we assessed the missingness of data within the dataset to understand how 
 
 To test this hypothesis, we perform a permutation test to evaluate if the missingness of ratings is dependent on other columns, namely `'num_calories'`, and `'minutes'`. We use difference in means since most it directly measures how the average values of a given continuous numerical column differ between the groups of missing and non-missing ratings. 
 
-**Null hypothesis (H0):** The missingness of `'ratings'` does not depend on `'num_calories'`, and `'minutes'`. <p></p>
-**Alternative hypothesis (H1):** The missingness of `'ratings'` does depend on `'num_calories'`, and `'minutes'`.  <p></p>
-**Test Statistic:** Difference in Means <p></p>
-**Significance Level (α):** 0.05 <p></p>
+**Null hypothesis (H0):** The missingness of `'ratings'` does not depend on `'num_calories'`, and `'minutes'`. 
+<p></p>
+**Alternative hypothesis (H1):** The missingness of `'ratings'` does depend on `'num_calories'`, and `'minutes'`.  
+<p></p>
+**Test Statistic:** Difference in Means 
+<p></p>
+**Significance Level (α):** 0.05 
+<p></p>
 If the p-value is less than α, we reject H0, indicating that the missingness of the 'rating' column is dependent on the specific column. Otherwise, we fail to reject H0.
 
 | Column         | p-value   | Dependent on Missingness (p < 0.05)? |
@@ -209,10 +213,14 @@ Based on the results of the permutation test, we identify that the missingness o
 ## Hypothesis Testing
 We decided to test whether there is a significant relationship between the number of calories in a recipe and its mean rating. We chose to use a permutation test because we do not have enough information to assume that the ratings or calories follow a normal distribution. 
 
-**Null Hypothesis (H0):** There is no relationship between the number of calories and the mean rating of a recipe <p></p>
-**Alternative Hypothesis (H1):** Higher-calorie recipes tend to have higher mean ratings than lower-calorie recipes. <p></p>
-**Test Statistic:** Difference in Means <p></p>
-**Significance Level (α):** 0.05 <p></p>
+**Null Hypothesis (H0):** There is no relationship between the number of calories and the mean rating of a recipe 
+<p></p>
+**Alternative Hypothesis (H1):** Higher-calorie recipes tend to have higher mean ratings than lower-calorie recipes. 
+<p></p>
+**Test Statistic:** Difference in Means 
+<p></p>
+**Significance Level (α):** 0.05 
+<p></p>
 
 Since the hypothesis is directional with numerical data, a difference in means test-statistic is the most appropriate. We reasoned that foods with higher calorie content, often rich in fats, sugars, and carbohydrates, are likely to be rated more favorably. For example, popular calorically-dense foods like pizza, cookies, and ice cream are often people's favorites, thus supporting the hypothesis that they would have higher ratings.
 
