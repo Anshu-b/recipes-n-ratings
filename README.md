@@ -109,32 +109,36 @@ The 'nutrition' column, originally stored as a string, is transformed into a lis
 
 
 #### Univariate Analysis
+Considering one of the most important variables in the data we are working with, ratings provide critical insight into the quality and success of recipes. The skewed distribution, with the majority of ratings clustered at the high end (particularly at around 5), suggests that posted recipes are generally well-received. It could also indicate however that users are more inclined to provide feedback only if it is favorable feedback. Exploring how other variables, such as the number of steps, number of ingredients, or the number of calories, interact with the ratings could help us understand key drivers of recipe success and user satisfaction.
 <iframe
   src="assets/plots/univariate1.html"
-  width="800"
-  height="600"
+  width="1000"
+  height="750"
   frameborder="0"
 ></iframe>
 
+Looking at another important variable in the data, the amount of calories in any recipe, we observe a highly right-skewed distribution. Most recipes have calorie counts concentrated between 0 and 500, with a steep decline as calories increase. This suggests that the majority of recipes are relatively low in calories, with a much smaller subset of recipes contributing to the higher calorie range. Outliers above 1,000 calories may represent specific types of high-calorie meals or desserts. Further analysis could explore how calorie counts correlate with other factors, such as the number of ingredients or recipe rating. Important to note, this graph has the most outlier values not displayed, as there are some recipes in the tens of thousands of calories that would make the graph indiscernable.
 <iframe
   src="assets/plots/univariate2.html"
-  width="800"
-  height="600"
+  width="1000"
+  height="750"
   frameborder="0"
 ></iframe>
 
 #### Bivariate Analysis
+For the multiple variable analysis, below is a visualization of calorie distribution segmented by recipe scores, with the spread of values displayed through five violin plots. The addition of boxplots within the violin plots highlights the central tendency and variability within each score group. We can see that the majority of recipes across all scores fall within a similar calorie range. It is important to note that this plot uses individual user scores rather than an average, ensuring a more detailed view of how calorie content is distributed for each rating score. While calorie ranges are generally consistent, slight differences in the distribution shapes and outliers might perhaps reflect subtle factors influencing user evaluations.
 <iframe
   src="assets/plots/multivariate1.html"
-  width="800"
-  height="600"
+  width="1000"
+  height="750"
   frameborder="0"
 ></iframe>
 
+An aspect we had not yet considered, recipes themselves can be analyzed and understood by examining the relationship between their complexity to make (as indicated by the number of steps) and the number of ingredients they require. This density heatmap reveals that most recipes cluster around having 5 to 10 steps and 5 to 10 ingredients, suggesting a general preference for simpler recipes. Recipes with more steps or ingredients are less common, as indicated by the decreasing density in the upper ranges of the plot. The concentration of data in this region aligns with user tendencies to prefer or create recipes that balance simplicity and variety, making them more practical for everyday use. Additionally, the relationship between the number of ingredients and steps is also worth making note of.
 <iframe
   src="assets/plots/multivariate2.html"
-  width="800"
-  height="600"
+  width="1000"
+  height="750"
   frameborder="0"
 ></iframe>
 
