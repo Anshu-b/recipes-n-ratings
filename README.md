@@ -49,6 +49,7 @@ We hypothesize that there is a positive correlation between calories and ratings
 Finding the results to this question can have significant impacts for companies such as food.com who profit off of user engagement, as well as the users of these types of sites. For the company, they can use the results of this study to change their reccomendation algorithms to prioritize recipes with certain nutrition trends. Additionally, it is important for users to beware of trends of like these, especially those with health problems, so they are aware of the fact that the most popular and highly-rated recipes on the website may not necessarily fit their dietary needs and restrictions.
 
 
+
 ## Data Cleaning & Exploratory Data Analysis
 This section will cover the steps we took to make our data more manageable, and also the observations we made during the EDA process.
 
@@ -56,13 +57,42 @@ This section will cover the steps we took to make our data more manageable, and 
 For ease in working with the data, we decided to left-merge the interactions dataframe onto the recipes dataframe. We specifically used left-merge to ensure all recipes in the dataset are preserved, regardless of the number of reviews it recieved. Merging the dataframe also allows us to map recipes to their reviews. Correspondingly, we also drop the duplicate column of 'id' and set 'recipe_id' to the index of our new DataFrame.
 
 #### Adding Average Ratings Column
-Since some recipes may have multiple ratings, it is helpful to add an average_rating [int] column to compare individual ratings with the mean rating for that recipe.
+The first step replaces missing ratings (initially set as 0) with NaN to accurately handle missing data. It then calculates the average rating for each recipe by grouping the data by recipe ID. This average rating is mapped back to the main DataFrame as a new column. 
 
+#### Optimizing DataFrame Indexing
+The redundant column id is dropped, and the DataFrame index is set to recipe_id to streamline data operations.
 
+#### Converting Timestamp Columns
+The 'submitted' and 'date' columns are converted into datetime objects from strings. 
 
-####
+#### Processing Categorical Lists
+Columns containing lists ('tags,' 'steps,' and 'ingredients') are cleaned by stripping unnecessary characters and converting them into Python lists. Additionally, a new column n_tags calculates the number of tags for each recipe.
+
+#### Parsing Nutritional Information:
+The 'nutrition' column, originally stored as a string, is transformed into a list of numeric values. A custom function separates the list of nutrition facts into individual columns, including calories, protein, and fat values. These new columns replace the original 'nutrition' column.
+
+#### New & Updated Columns
+| Column               | Description                                                                                 |
+|-----------------------|---------------------------------------------------------------------------------------------|
+| `'submitted'`        | Date the recipe was submitted [datetime object]                                             |
+| `'tags'`             | List of descriptive tags associated with the recipe [list of strings]                       |
+| `'steps'`            | Step-by-step instructions for preparing the recipe [list of strings]                        |
+| `'ingredients'`      | List of ingredients used in the recipe [list of strings]                                    |
+| `'date'`             | Date of the recipe review or interaction [datetime object]                                  |
+| `'average_rating'`   | Average rating for the recipe across all reviews [float]                                    |
+| `'n_tags'`           | Number of tags associated with the recipe [int]                                             |
+| `'num_calories'`     | Total calorie content of the recipe [float]                                                 |
+| `'total_fat_PDV'`    | Total fat as a percentage of daily value (PDV) [float]                                      |
+| `'sugar_PDV'`        | Sugar content as a percentage of daily value (PDV) [float]                                  |
+| `'sodium_PDV'`       | Sodium content as a percentage of daily value (PDV) [float]                                 |
+| `'protein_PDV'`      | Protein content as a percentage of daily value (PDV) [float]                                |
+| `'saturated_fat_PDV'`| Saturated fat as a percentage of daily value (PDV) [float]                                  |
+| `'carbohydrates_PDV'`| Carbohydrates content as a percentage of daily value (PDV) [float]                          |
+
 
 ## Hypothesis Testing
+
+
 
 ## Framing a Prediction
 
