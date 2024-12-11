@@ -109,10 +109,34 @@ The 'nutrition' column, originally stored as a string, is transformed into a lis
 
 
 #### Univariate Analysis
-# **PLOT**
+<iframe
+  src="assets/plots/univariate1.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+<iframe
+  src="assets/plots/univariate2.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 #### Bivariate Analysis
-# **PLOT**
+<iframe
+  src="assets/plots/multivariate1.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+<iframe
+  src="assets/plots/multivariate2.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 #### Interesting Aggregates
 
