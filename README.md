@@ -109,32 +109,33 @@ The 'nutrition' column, originally stored as a string, is transformed into a lis
 
 
 #### Univariate Analysis
+Considering one of the most important variables in the data we are working with, ratings provide critical insight into the quality and success of recipes. The skewed distribution, with the majority of ratings clustered at the high end (particularly at around 5), suggests that posted recipes are either generally well-received. It could also indicate however that users are more inclined to provide feedback only if it is favorable feedback. Exploring how other variables, such as the number of steps, number of ingredients, or the number of calories, interact with the ratings could help us understand key drivers of recipe success and user satisfaction.
 <iframe
   src="assets/plots/univariate1.html"
-  width="800"
-  height="600"
+  width="1000"
+  height="750"
   frameborder="0"
 ></iframe>
 
 <iframe
   src="assets/plots/univariate2.html"
-  width="800"
-  height="600"
+  width="1000"
+  height="750"
   frameborder="0"
 ></iframe>
 
 #### Bivariate Analysis
 <iframe
   src="assets/plots/multivariate1.html"
-  width="800"
-  height="600"
+  width="1000"
+  height="750"
   frameborder="0"
 ></iframe>
 
 <iframe
   src="assets/plots/multivariate2.html"
-  width="800"
-  height="600"
+  width="1000"
+  height="750"
   frameborder="0"
 ></iframe>
 
