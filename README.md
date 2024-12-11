@@ -242,7 +242,39 @@ To challenge ourselves further, we additionally decided to run a classification 
 
 ## Baseline Model
 
+Our baseline model aims to predict the average rating of a recipe using **basic linear regression**. The features used in this model are **number of calories,** which is a quantitative variable, and the **tags associated with each recipe,** a nominal variable encoded using TF-IDF. We passed the number of calories directly into the model without any transformation, while the tags were processed using a custom tokenizer to preserve multi-word tags (e.g., "quick-recipe") before applying TF-IDF encoding. The default toknizer for TF-IDF splits up more complex tags, which defeats the purpose of modeling by tag in the first place. The TF-IDF approach converted the nominal strings in `"tags"` into a numerical representation, ensuring meaningful textual patterns were captured as predictive signals.
+
+To preprocess the data, we used a `ColumnTransformer` to handle the data types: the calorie feature was left untouched (passthrough), and the tags underwent tokenization and vectorization by TF-IDF. The dataset was split into a standard 80/20 train-test split, ensuring the model was evaluated on unseen data as well.
+
+We judged our performance of the baseline model using mean squared error (MSE) and R-squared (R^2) metrics. The model achieved an **MSE of 0.238**, indicating the average squared deviation of predictions from the actual ratings. However, the **R^2 score was 0.037**, suggesting that only 3.7% of the variance in average ratings was explained by the model 😔. The low R^2 score indicates that the current model struggles to capture the relationship between the features and the target variable. While the number of calories and TF-IDF-encoded tags may have some predictive power (R^2 > 0), they are likely not enough to explain the trends of recipe ratings fully. Since our R^2 at least wasn't 0, we think this model can be considered a reasonable starting point but is not yet good by any standard. 
+
 ## Final Model
+
+#### Improving on Linear Regression
+To improve for the final model, we expanded the features to include additional numerical and text-based features that we believe are closely related to recipe ratings based on the data-generating process. The added numerical features include the nutritional stats such as total fat, sugar, sodium, protein, saturated fat, carbohydrates PDVs and recipe-specific features like the number of tags (n_tags) and review length (len_review). These recipe-specific features were chosen because they capture important aspects of a recipe’s quality and complexity, which can influence user ratings. Nutritional statistics might incluence users who are health-conscious or boost unhelathier indulgent recipes. The number of tags can reveal more about how food.com may promote recipes with specific tags to tailor the preferences of certian people, while review length can serve as a measurement for user engagement.
+
+We also kept the tags column and incorporated the review column to account for the sentiment and key-words of user feedback. By combining these features, we aimed to better utilize the available data for a better prediction model.
+
+We created the model pipeline with a ColumnTransformer to preprocess numerical features directly and apply TF-IDF to the text-based features. The final model achieved a **Mean Squared Error (MSE) of 0.216** and an **R^2 score of 0.128** on the test set. Compared to the baseline model (MSE = 0.238, R^2 = 0.037), this represents a significant improvement, with the R^2 score increasing by approximately 250%. The better performance suggests that the expanded feature set captures more of the variance in recipe ratings, providing additional predictive power. It is important to recognize though that isn't a great value still, but we can attribute this to the fact that this is a task involving subjective human preferences, and there may be potential for further improvement with more complex regression models or possibly a different combination of features.
+
+Since we used linear regression, no hyperparameter tuning was needed since focused on feature engineering and multi-dimensional linear regression. However, we decided to also use Classification as a bonus exploration of our data, which did involve hyperparamter tuning.
+
+#### Looking at Classification: Random Forest Classifier
+Due to our linear regression model's rather poor overall performance, our group explored using multi-class classification to predict the average rating of a recipe. Since average ratings are ordinal, we explicitly converted them to categorical labels by grouping them into discrete bins of 0.5 by rounding the continuous `average_rating` values to the nearest half point (ex: 4.5). This created a new feature, `avg_rating_group`, that became the target variable. 
+
+For the feature set, we used `num_calories`, a numerical feature, and `tags_split`, a text feature represented by TF-IDF. These features were processed with a ColumnTransformer to handle the two types of input data appropriately.
+
+Similar to the prior approach with a baseline and a final model, we initially created a Random Forest Classifier with arbitrary hyperparameters. These 'arbitrary' hyperparamaters were actually the final hyperparameters extracted from another rendition of this project, which aimed to find the relationship between [levels of sugar and average ratings](https://cecilia-lin.github.io/RecipeProject/). Since our features were different, we figured that these wouldn't be our optimal hyperparameters, but thought it would be an interesting place to start. 
+
+This 'baseline' model achieved an **accuracy of 82%** with decent performance across different classes, though the recall and precision for lower-rated categories were notably weak, likely due to fewer avilable data points. The F1 scores for most categories, particularly the higher ratings (4.5 and 5.0), were high, indicating that the model could successfully predict high-rated recipes but struggled with the lower ratings. We also calculated the macro-average (finding unweighted mean of all classes treating them classes) **precision of 95%**, **recall of 33%**, and **f1 of 42%**.
+
+#### Hyperparameter Tuning with GridSearchCV
+To improve the classification model, we performed hyperparameter tuning using GridSearchCV. We tested different values for two hyperparameters: `n_estimators`, which is the number of decision trees, and `max_depth`, depth of the trees. The best model hyperparameters turned out to be `n_estimators=200` and interestingly an unrestricted tree depth, `max_depth=None`. This means the trees were allowed to grow deeper and capture more complex patterns in the data.
+
+After this hyperparameter tuning, we recalculated our metric and saw an improvement in **accuracy to 92%** compared to the initial model, while also improving performance in recall and precision for the lower-rated categories. The new macro-average  **precision is 88%**, **recall of 64%**, and **f1 of 70%**. While precision slightly drops, the important thing to notice is that recall significantly jumps along with the f1-score, which is the primary measurement of focus in this case.
+
+Overall, we realized that classification is a valid approach for predicting recipe ratings (better than regression in our case), especially when ratings are treated as categorical labels. The Random Forest Classifier with hyperparameter tuning from GridSearchCV shows very good performance with only a few features, particularly for higher-rated recipes. However, we still couldn't very accurately predict the lower-rated categories due to data imbalance.
+
 
 ## Fairness Model
 
